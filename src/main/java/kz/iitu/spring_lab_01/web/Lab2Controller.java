@@ -2,7 +2,9 @@ package kz.iitu.spring_lab_01.web;
 
 import kz.iitu.spring_lab_01.lifecycle.LifecycleDemo;
 import kz.iitu.spring_lab_01.notify.NotificationService;
+import kz.iitu.spring_lab_01.notify.Notifier;
 import kz.iitu.spring_lab_01.scope.TicketOffice;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +17,16 @@ public class Lab2Controller {
     private final NotificationService notifications;
     private final LifecycleDemo lifecycle;
     private final TicketOffice ticketOffice;
+    private final Notifier custom;
 
     public Lab2Controller(NotificationService notifications,
                           LifecycleDemo lifecycle,
-                          TicketOffice ticketOffice) {
+                          TicketOffice ticketOffice,
+                          @Qualifier("telegram") Notifier custom) {
         this.notifications = notifications;
         this.lifecycle = lifecycle;
         this.ticketOffice = ticketOffice;
+        this.custom = custom;
     }
 
     @GetMapping("/notify")
@@ -42,5 +47,10 @@ public class Lab2Controller {
     @GetMapping("/scopes")
     public Map<String, Object> scopes() {
         return ticketOffice.demo();
+    }
+
+    @GetMapping("/custom")
+    public String custom(@RequestParam String text) {
+        return custom.send(text);
     }
 }
