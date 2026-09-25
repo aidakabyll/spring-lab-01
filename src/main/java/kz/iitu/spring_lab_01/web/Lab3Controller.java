@@ -36,6 +36,12 @@ public class Lab3Controller {
         response.put("retryCount", props.mail().retryCount());
         response.put("timeout", props.mail().timeout().toString());
         response.put("mailEnabled", props.mail().enabled());
+
+        // NEW: individual assignment (variant 11)
+        response.put("reportTimezone", props.report().timezone());
+        response.put("reportRetention", props.report().retention().toString());
+        response.put("reportIncludeCharts", props.report().includeCharts());
+
         response.put("banner", banner.describe());
         response.put("activeProfiles", List.of(environment.getActiveProfiles()));
         response.put("port", environment.getProperty("server.port"));

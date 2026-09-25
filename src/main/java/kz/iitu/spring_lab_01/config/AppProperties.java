@@ -22,7 +22,10 @@ public record AppProperties(
         String group,
 
         @Valid
-        Mail mail
+        Mail mail,
+
+        @Valid
+        Report report
 ) {
 
     public record Mail(
@@ -41,6 +44,19 @@ public record AppProperties(
 
             @DefaultValue("true")
             boolean enabled
+    ) {
+    }
+
+    public record Report(
+
+            @NotBlank
+            String timezone,
+
+            @DefaultValue("30d")
+            Duration retention,
+
+            @DefaultValue("false")
+            boolean includeCharts
     ) {
     }
 }
