@@ -1,0 +1,10 @@
+package kz.iitu.spring_lab_01.audit;
+
+import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface RetryOnFailure {
+    int attempts() default 3;
+}

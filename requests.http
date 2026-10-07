@@ -1,0 +1,11 @@
+### GET item
+GET http://localhost:8080/api/lab4/item/5
+
+### GET items
+GET http://localhost:8080/api/lab4/items?limit=3
+
+### DELETE valid
+DELETE http://localhost:8080/api/lab4/item/5
+
+### DELETE invalid
+DELETE http://localhost:8080/api/lab4/item/0
