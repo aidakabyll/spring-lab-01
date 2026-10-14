@@ -55,4 +55,13 @@ public class BookRestController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteByAuthor(@RequestParam String author) {
+        int deleted = service.deleteByAuthor(author);
+        return ResponseEntity
+                .noContent()
+                .header("X-Deleted-Count", String.valueOf(deleted))
+                .build();
+    }
 }

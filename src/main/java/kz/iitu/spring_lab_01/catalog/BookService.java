@@ -19,7 +19,7 @@ public class BookService {
             return repository.findAll();
         }
         return repository.findAll().stream()
-                .filter(b -> author.equalsIgnoreCase(b.author()))
+                .filter(b -> b.author().toLowerCase().contains(author.toLowerCase()))
                 .toList();
     }
 
@@ -33,5 +33,17 @@ public class BookService {
 
     public boolean delete(long id) {
         return repository.deleteById(id);
+    }
+
+    public int deleteByAuthor(String author) {
+        int count = 0;
+        for (Book book : repository.findAll()) {
+            if (author.equalsIgnoreCase(book.author())) {
+                if (repository.deleteById(book.id())) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
