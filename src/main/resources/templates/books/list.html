@@ -8,6 +8,15 @@
 <body>
 <h1 th:text="${title}">Catalogue</h1>
 <p th:if="${message}" class="flash" th:text="${message}"></p>
+
+<h2>Add a book</h2>
+<form method="post" action="/books" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="author" placeholder="Author" required>
+    <input type="number" name="year" placeholder="Year" required style="width: 100px;">
+    <button type="submit">Add</button>
+</form>
+
 <table>
     <tr><th>#</th><th>Title</th><th>Author</th><th>Year</th></tr>
     <tr th:each="book : ${books}">
